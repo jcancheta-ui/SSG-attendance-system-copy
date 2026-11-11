@@ -56,3 +56,74 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## SPAMAST SSG Attendance System — Local Setup
+
+### Requirements
+- PHP and Composer
+- MySQL and phpMyAdmin
+- Node.js and npm
+
+### Installation and Configuration
+
+1. Copy `.env.example` to `.env`:
+
+   ```powershell
+   Copy-Item .env.example .env
+   ```
+
+2. Install dependencies if they are not already installed:
+
+   ```powershell
+   composer install
+   npm install
+   ```
+
+3. Generate the application key:
+
+   ```powershell
+   php artisan key:generate
+   ```
+
+4. Create or use the database agreed upon by the team in phpMyAdmin. Configure your local `.env` with your own MySQL credentials:
+
+   ```dotenv
+   APP_NAME="SPAMAST SSG Attendance"
+   APP_ENV=local
+   APP_DEBUG=true
+   APP_URL=http://127.0.0.1:8000
+
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=spamast_ssg_db
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+   The blank password is only an example. Use your own local MySQL password in `.env`, never in this README.
+
+5. Clear Laravel's caches:
+
+   ```powershell
+   php artisan config:clear
+   php artisan cache:clear
+   php artisan route:clear
+   php artisan view:clear
+   ```
+
+6. Start the local server:
+
+   ```powershell
+   php artisan serve
+   ```
+
+7. Open http://127.0.0.1:8000 in your browser. If the project uses Vite assets, run `npm run dev` in a second terminal.
+
+### Database Safety
+
+- Never commit or share your local `.env` file.
+- Confirm the database connection before running migrations.
+- Do not run `php artisan migrate:fresh --seed` on a database containing existing or shared data without explicit authorization.
+- Ask the team before running pending migrations.
